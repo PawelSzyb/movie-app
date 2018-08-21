@@ -13,7 +13,7 @@ const validateMovieInput = require("../../validation/movie");
 router.get("/", (req, res) => {
   Movie.find()
     .then(movies => res.json(movies))
-    .catch(err => res.status(404).json({ notmoviesfound: "Movies not found" }));
+    .catch(err => res.status(404).json(err));
 });
 
 // @route  POST api/movies
@@ -36,9 +36,12 @@ router.post("/", (req, res) => {
           movie_id: response.data.imdbID
         });
         newMovie.save().then(movie => res.json(movie));
-      } else res.status(404).json(response.data.Error);
+      } else {
+        errors.movie = response.data.Error;
+        res.status(404).json(errors);
+      }
     })
-    .catch(err => res.status(404).json({ movienotfound: "Movie not found" }));
+    .catch(err => res.status(404).json(err));
 });
 
 module.exports = router;
