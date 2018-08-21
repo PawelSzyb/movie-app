@@ -5,9 +5,19 @@ const axios = require("axios");
 // Load Models
 const Movie = require("../../models/Movie");
 
+// Validations
+const validateMovieInput = require("../../validation/movie");
+
 // @route  POST api/movies
 // @desc   POST movie from OMDb API
 router.post("/", (req, res) => {
+  // Validate input
+  const { errors, isValid } = validateMovieInput(req.body);
+  // Send errors if any
+  if (!isValid) {
+    res.status(400).json(errors);
+  }
+
   const { title } = req.body;
   axios
     .get(`http://www.omdbapi.com/?t=${title}&apikey=4a5156ae`)
