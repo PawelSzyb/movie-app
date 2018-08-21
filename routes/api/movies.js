@@ -8,6 +8,14 @@ const Movie = require("../../models/Movie");
 // Validations
 const validateMovieInput = require("../../validation/movie");
 
+// @route  GET api/movies
+// @desc   Gets movies from DB
+router.get("/", (req, res) => {
+  Movie.find()
+    .then(movies => res.json(movies))
+    .catch(err => res.status(404).json({ notmoviesfound: "Movies not found" }));
+});
+
 // @route  POST api/movies
 // @desc   POST movie from OMDb API
 router.post("/", (req, res) => {
