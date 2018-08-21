@@ -5,6 +5,10 @@ const MovieSchema = new Schema({
   movie: {
     type: Object,
     required: true
+  },
+  movie_id: {
+    type: String,
+    required: true
   }
 });
 

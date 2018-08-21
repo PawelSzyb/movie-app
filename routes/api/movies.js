@@ -32,7 +32,8 @@ router.post("/", (req, res) => {
     .then(response => {
       if (response.data.Response === "True") {
         const newMovie = new Movie({
-          movie: response.data
+          movie: response.data,
+          movie_id: response.data.imdbID
         });
         newMovie.save().then(movie => res.json(movie));
       } else res.status(404).json(response.data.Error);
