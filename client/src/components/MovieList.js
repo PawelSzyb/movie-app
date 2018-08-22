@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import MovieAdd from "./MovieAdd";
+
 class MovieList extends Component {
   state = {
     results: []
@@ -15,6 +17,7 @@ class MovieList extends Component {
     const movies = this.state.results;
     return (
       <div className="container">
+        <MovieAdd />
         <h1 className="text-center mt-5 mb-3">Movie List</h1>
         <div className="results">
           {movies.map(item => (
