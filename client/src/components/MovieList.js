@@ -31,18 +31,30 @@ class MovieList extends Component {
               <div className="card-header" id="heading">
                 <h5 className="mb-0">
                   <button
-                    className="btn btn-link"
+                    className="btn btn-link "
                     type="button"
                     style={{ width: "100%" }}
                     data-toggle="collapse"
                     data-target={`#collapse${item.movie_id}`}
+                    aria-expanded="false"
                   >
                     {item.movie.Title}
                   </button>
                 </h5>
               </div>
 
-              <div id={`collapse${item.movie_id}`} className="collapse show">
+              <div id={`collapse${item.movie_id}`} className="collapse">
+                <img
+                  className="card-img-top img-fluid"
+                  style={{
+                    height: "330px",
+                    width: "310px",
+                    margin: "10px auto",
+                    display: "block"
+                  }}
+                  src={item.movie.Poster}
+                  alt="Movie"
+                />
                 <div className="card-body">{item.movie.Plot}</div>
               </div>
             </div>

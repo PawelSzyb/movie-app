@@ -34,7 +34,7 @@ router.post("/", (req, res) => {
         Movie.findOne({ movie_id: response.data.imdbID }).then(movie => {
           if (movie) {
             errors.id = "Movie already exists in database";
-            res.json(errors);
+            res.status(400).json(errors);
           } else {
             const newMovie = new Movie({
               movie: response.data,

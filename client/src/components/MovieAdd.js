@@ -17,12 +17,11 @@ class MovieAdd extends Component {
     const title = this.state.title;
     axios
       .post("/api/movies", { title })
-      .then(movie =>
+      .then(movie => {
         this.setState({
-          movie: movie.data,
-          errors: {}
-        })
-      )
+          movie: movie.data
+        });
+      })
       .then(() => this.props.addMovie(this.state.movie))
       .catch(err => this.setState({ errors: err.response.data }));
   };
@@ -35,14 +34,16 @@ class MovieAdd extends Component {
           <label htmlFor="titleInput">Movie Title</label>
           <input
             type="text"
-            className={`form-control ${errors.title ? "is-invalid" : ""}`}
+            className={`form-control ${
+              errors.title || errors.id ? "is-invalid" : ""
+            }`}
             id="titleInput"
             placeholder="Enter title"
             name="title"
             onChange={this.onInputChange}
           />
-          {errors.title ? (
-            <div className="invalid-feedback">{errors.title}</div>
+          {errors.title || errors.id ? (
+            <div className="invalid-feedback">{errors.title || errors.id}</div>
           ) : null}
           <button
             type="submit"
