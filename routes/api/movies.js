@@ -31,11 +31,18 @@ router.post("/", (req, res) => {
     .get(`http://www.omdbapi.com/?t=${title}&apikey=4a5156ae`)
     .then(response => {
       if (response.data.Response === "True") {
-        const newMovie = new Movie({
-          movie: response.data,
-          movie_id: response.data.imdbID
+        Movie.findOne({ movie_id: response.data.imdbID }).then(movie => {
+          if (movie) {
+            errors.id = "Movie already exists in database";
+            res.json(errors);
+          } else {
+            const newMovie = new Movie({
+              movie: response.data,
+              movie_id: response.data.imdbID
+            });
+            newMovie.save().then(movie => res.json(movie));
+          }
         });
-        newMovie.save().then(movie => res.json(movie));
       } else {
         errors.movie = response.data.Error;
         res.status(404).json(errors);

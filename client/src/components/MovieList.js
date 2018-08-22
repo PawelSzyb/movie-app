@@ -13,11 +13,17 @@ class MovieList extends Component {
       .then(movies => this.setState({ results: movies.data }))
       .catch(err => console.log(err));
   }
+  addMovie = movie => {
+    let movies = [...this.state.results, movie];
+    this.setState({
+      results: movies
+    });
+  };
   render() {
     const movies = this.state.results;
     return (
-      <div className="container">
-        <MovieAdd />
+      <div className="container" style={{ maxWidth: "800px" }}>
+        <MovieAdd addMovie={this.addMovie} />
         <h1 className="text-center mt-5 mb-3">Movie List</h1>
         <div className="results">
           {movies.map(item => (
