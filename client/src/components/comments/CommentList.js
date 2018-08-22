@@ -23,7 +23,13 @@ class CommentList extends Component {
     return (
       <div style={{ maxWidth: "800px" }} className="container">
         <CommentAdd commentAddHandler={this.commentAddHandler} />
-
+        <Link
+          className="btn btn-primary"
+          style={{ width: "100%" }}
+          to="/comments/filter"
+        >
+          Click to filter comments by ID{" "}
+        </Link>
         <h1 className="text-center mt-5 mb-3">Comment List</h1>
         <ul className="list-group mb-5">
           {comments.map(item => (
