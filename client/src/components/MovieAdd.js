@@ -49,6 +49,7 @@ class MovieAdd extends Component {
             type="submit"
             onClick={this.onSubmitClick}
             className="btn btn-primary mt-3 mb-3"
+            style={{ width: "100%" }}
           >
             Submit
           </button>

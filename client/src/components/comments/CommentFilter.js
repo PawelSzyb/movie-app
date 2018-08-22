@@ -4,7 +4,8 @@ import axios from "axios";
 class CommentFilter extends Component {
   state = {
     idInput: "",
-    results = []
+    results: [],
+    errors: {}
   };
 
   onInputChange = e => {
@@ -16,25 +17,30 @@ class CommentFilter extends Component {
     const id = this.state.idInput;
     axios
       .get(`/api/comments/${id}`)
-      .then(movies => this.setState({results: movies.data}))
-      .catch(err => console.log(err.response.data));
+      .then(movies => this.setState({ results: movies.data, errors: {} }))
+      .catch(err => this.setState({ errors: err.response.data }));
   };
 
   render() {
+    const { results, errors } = this.state;
+
     return (
-      <div className="container">
+      <div className="container mb-4" style={{ maxWidth: "800px" }}>
         <h1 className="text-center mt-5">Comment Filter</h1>
         <form>
           <div className="form-group mt-4">
             <label htmlFor="filterInput">Movie ID</label>
             <input
               type="text"
-              className="form-control"
+              className={`form-control ${errors.comments ? "is-invalid" : ""}`}
               id="filterInput"
               placeholder="Enter movie id"
               name="idInput"
               onChange={this.onInputChange}
             />
+            {errors.comments ? (
+              <div className="invalid-feedback">{errors.comments}</div>
+            ) : null}
             <button
               type="submit"
               style={{ width: "100%" }}
@@ -45,6 +51,16 @@ class CommentFilter extends Component {
             </button>
           </div>
         </form>
+        <div>
+          <ul className="list-group">
+            {results.map(item => (
+              <li key={item._id} className="list-group-item">
+                {item.text}
+                <div>{item.movie_id}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

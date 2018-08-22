@@ -22,7 +22,7 @@ class MovieList extends Component {
   render() {
     const movies = this.state.results;
     return (
-      <div className="container" style={{ maxWidth: "800px" }}>
+      <div className="container mb-5" style={{ maxWidth: "800px" }}>
         <MovieAdd addMovie={this.addMovie} />
         <h1 className="text-center mt-5 mb-3">Movie List</h1>
         <div className="results">
@@ -57,7 +57,9 @@ class MovieList extends Component {
                 />
                 <div className="card-body">
                   {item.movie.Plot}
-                  <div className="mt-5">Movie ID: {item.movie_id}</div>
+                  <div className="mt-3">Actors: {item.movie.Actors}</div>
+                  <div className="mt-3">Type: {item.movie.Type}</div>
+                  <div className="mt-3">Movie ID: {item.movie_id}</div>
                 </div>
               </div>
             </div>

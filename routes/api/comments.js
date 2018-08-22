@@ -7,7 +7,7 @@ const Comment = require("../../models/Comment");
 const Movie = require("../../models/Movie");
 
 //Validation
-const validateTextareaInput = require("../../validation/comments");
+const validateTextInput = require("../../validation/comments");
 
 //@route /api/comments
 //@desc get comments associated with movie
@@ -18,7 +18,7 @@ router.get("/:id", (req, res) => {
       if (!isEmpty(comments)) {
         res.json(comments);
       } else {
-        errors.assocComments = "Comments not found";
+        errors.comments = "Comments not found";
         res.status(404).json(errors);
       }
     })
@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
 //@route /api/comments
 //@desc post comment
 router.post("/", (req, res) => {
-  const { errors, isValid } = validateTextareaInput(req.body);
+  const { errors, isValid } = validateTextInput(req.body);
 
   console.log(req.body.id);
 
