@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import CommentAdd from "../comments/CommentAdd";
 
@@ -13,13 +14,18 @@ class CommentList extends Component {
       .then(movies => this.setState({ results: movies.data }))
       .catch(err => console.log(err));
   }
+  commentAddHandler = comment => {
+    let comments = [...this.state.results, comment];
+    this.setState({ results: comments });
+  };
   render() {
     const comments = this.state.results;
     return (
       <div style={{ maxWidth: "800px" }} className="container">
-        <CommentAdd />
+        <CommentAdd commentAddHandler={this.commentAddHandler} />
+
         <h1 className="text-center mt-5 mb-3">Comment List</h1>
-        <ul className="list-group">
+        <ul className="list-group mb-5">
           {comments.map(item => (
             <li key={item._id} className="list-group-item">
               Comment: {item.text}

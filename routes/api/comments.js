@@ -6,6 +6,9 @@ const isEmpty = require("../../validation/is-empty");
 const Comment = require("../../models/Comment");
 const Movie = require("../../models/Movie");
 
+//Validation
+const validateTextareaInput = require("../../validation/comments");
+
 //@route /api/comments
 //@desc get comments associated with movie
 router.get("/:id", (req, res) => {
@@ -32,6 +35,14 @@ router.get("/", (req, res) => {
 //@route /api/comments
 //@desc post comment
 router.post("/", (req, res) => {
+  const { errors, isValid } = validateTextareaInput(req.body);
+
+  console.log(req.body.id);
+
+  if (!isValid) {
+    res.status(400).json(errors);
+  }
+
   Movie.findOne({ movie_id: req.body.id }).then(movie => {
     if (movie) {
       const newComment = new Comment({
@@ -39,7 +50,10 @@ router.post("/", (req, res) => {
         text: req.body.text
       });
       newComment.save().then(comment => res.json(comment));
-    } else res.status(404).json({ commentnotfound: "No movie found" });
+    } else {
+      errors.movie = "No movie found in database with that ID";
+      res.status(404).json(errors);
+    }
   });
 });
 

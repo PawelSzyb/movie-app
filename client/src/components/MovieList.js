@@ -55,7 +55,10 @@ class MovieList extends Component {
                   src={item.movie.Poster}
                   alt="Movie"
                 />
-                <div className="card-body">{item.movie.Plot}</div>
+                <div className="card-body">
+                  {item.movie.Plot}
+                  <div className="mt-5">Movie ID: {item.movie_id}</div>
+                </div>
               </div>
             </div>
           ))}
