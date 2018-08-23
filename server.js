@@ -19,10 +19,6 @@ mongoose
   .then(() => console.log("DB connected"))
   .catch(err => console.log(err));
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
-
 // Routes
 app.use("/api/movies", movies);
 app.use("/api/comments", comments);
