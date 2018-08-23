@@ -26,7 +26,7 @@ class CommentFilter extends Component {
 
     return (
       <div className="container mb-4" style={{ maxWidth: "800px" }}>
-        <h1 className="text-center mt-5">Comment Filter</h1>
+        <h1 className="text-center mt-5">Comments Filter</h1>
         <form>
           <div className="form-group mt-4">
             <label htmlFor="filterInput">Movie ID</label>

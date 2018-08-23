@@ -30,7 +30,7 @@ class CommentList extends Component {
         >
           Click to filter comments by ID{" "}
         </Link>
-        <h1 className="text-center mt-5 mb-3">Comment List</h1>
+        <h1 className="text-center mt-5 mb-3">Comments List</h1>
         <ul className="list-group mb-5">
           {comments.map(item => (
             <li key={item._id} className="list-group-item">

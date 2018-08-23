@@ -24,7 +24,7 @@ class MovieList extends Component {
     return (
       <div className="container mb-5" style={{ maxWidth: "800px" }}>
         <MovieAdd addMovie={this.addMovie} />
-        <h1 className="text-center mt-5 mb-3">Movie List</h1>
+        <h1 className="text-center mt-5 mb-3">Movies List</h1>
         <div className="results">
           {movies.map(item => (
             <div className="card" key={item.movie_id}>
