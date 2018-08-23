@@ -19,10 +19,13 @@ class MovieAdd extends Component {
       .post("/api/movies", { title })
       .then(movie => {
         this.setState({
-          movie: movie.data
+          movie: movie.data,
+          errors: {}
         });
       })
-      .then(() => this.props.addMovie(this.state.movie))
+      .then(() => {
+        this.props.addMovie(this.state.movie);
+      })
       .catch(err => this.setState({ errors: err.response.data }));
   };
 
