@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const isEmpty = require("../../validation/is-empty");
 
-// Import schema
+// Load Models
 const Comment = require("../../models/Comment");
 const Movie = require("../../models/Movie");
 
