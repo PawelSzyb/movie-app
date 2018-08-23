@@ -19,7 +19,7 @@ class CommentAdd extends Component {
     const { text } = this.state;
     axios
       .post("/api/comments", { id, text })
-      .then(comment => this.setState({ result: comment.data }))
+      .then(comment => this.setState({ result: comment.data, errors: {} }))
       .then(() => this.props.commentAddHandler(this.state.result))
       .catch(err => this.setState({ errors: err.response.data }));
   };
